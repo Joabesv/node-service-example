@@ -1,8 +1,6 @@
 import type { FastifyInstance } from 'fastify'
 import fastifyUnderPressure, { type FastifyUnderPressureOptions } from '@fastify/under-pressure'
-import { sql } from 'drizzle-orm'
 import fp from 'fastify-plugin'
-import { usersTable } from '../../models/models.js'
 
 export function autoConfig(app: FastifyInstance): FastifyUnderPressureOptions {
   return {
@@ -14,12 +12,12 @@ export function autoConfig(app: FastifyInstance): FastifyUnderPressureOptions {
     retryAfter: 50,
     healthCheck: async () => {
       try {
-        await app.drizzle.select({ t: sql`SELECT 1` }).from(usersTable)
+        await app.drizzle.$client.query('SELECT 1')
         return true
         /* c8 ignore start */
       }
       catch (err) {
-        app.log.error(err, 'healthCheck has failed')
+        app.log.error({ err }, 'healthCheck has failed')
         throw new Error('Database connection is not available')
       }
       /* c8 ignore stop */

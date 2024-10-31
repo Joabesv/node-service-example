@@ -14,13 +14,15 @@ export const plugin: FastifyPluginAsyncZodOpenApi = async (app) => {
                 description: 'Mensagem padrão',
                 example: 'teste',
               }),
+              t: z.any(),
             }),
           },
         },
       },
     },
-  } satisfies FastifyZodOpenApiSchema }, () => {
-    return { message: 'teste' }
+  } satisfies FastifyZodOpenApiSchema }, async () => {
+    const aa = await app.drizzle.query.usersTable.findMany()
+    return { message: 'teste', t: aa }
   })
 }
 

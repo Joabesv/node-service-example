@@ -46,7 +46,7 @@ app.setSerializerCompiler(serializerCompiler)
 
 async function init() {
   app.register(fp(buildApp))
-
+  app.log.warn(app.drizzle)
   // Delay is the number of milliseconds for the graceful close to finish
   closeWithGrace(
     { delay: Number(process.env.FASTIFY_CLOSE_GRACE_DELAY) ?? 500 },

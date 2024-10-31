@@ -25,5 +25,5 @@ export function autoConfig(): DrizzleConfig<typeof models> {
 
 export default fp(async (app: FastifyInstance, opts: any) => {
   // @ts-expect-error No big
-  app.decorate('drizzle', drizzle(opts))
+  app.decorate('drizzle', drizzle(app.config.DATABASE_URL, { ...opts }))
 }, { name: 'drizzle' })

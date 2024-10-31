@@ -14,6 +14,7 @@ declare module 'fastify' {
       RATE_LIMIT_MAX: number
       UPLOAD_DIRNAME: string
       UPLOAD_TASKS_DIRNAME: string
+      DATABASE_URL: string
     }
   }
 }
@@ -27,6 +28,7 @@ const schema = {
     'COOKIE_SECRET',
     'COOKIE_NAME',
     'COOKIE_SECURED',
+    'DATABASE_URL',
   ],
   properties: {
     // Database
@@ -37,6 +39,9 @@ const schema = {
       type: 'string',
     },
     PG_DATABASE: {
+      type: 'string',
+    },
+    DATABASE_URL: {
       type: 'string',
     },
     // Security
