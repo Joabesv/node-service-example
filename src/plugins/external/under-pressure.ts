@@ -1,6 +1,8 @@
 import type { FastifyInstance } from 'fastify'
 import fastifyUnderPressure, { type FastifyUnderPressureOptions } from '@fastify/under-pressure'
+import { sql } from 'drizzle-orm'
 import fp from 'fastify-plugin'
+import { usersTable } from '../../models/models.js'
 
 export function autoConfig(app: FastifyInstance): FastifyUnderPressureOptions {
   return {
@@ -12,7 +14,7 @@ export function autoConfig(app: FastifyInstance): FastifyUnderPressureOptions {
     retryAfter: 50,
     healthCheck: async () => {
       try {
-        // await app.knex.raw('SELECT 1')
+        await app.drizzle.select({ t: sql`SELECT 1` }).from(usersTable)
         return true
         /* c8 ignore start */
       }
