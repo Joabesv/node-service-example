@@ -17,7 +17,7 @@
     "watch": "tsc -w",
     "dev": "npm run build && concurrently -k -p \"[{name}]\" -n \"TypeScript,App\" -c \"yellow.bold,cyan.bold\" \"npm:watch\" \"npm:dev:start\"",
     "dev:start": "npm run build && fastify start --ignore-watch=.ts$ -w -l info -P dist/app.js",
-    "test": "npm run db:seed && tap --jobs=1 test/**/*",
+    "test": "tap --jobs=1 test/**/*",
     "standalone": "npm run build && node --env-file=.env dist/server.js",
     "lint": "eslint --ignore-pattern=dist --fix",
     "lint:fix": "npm run lint -- --fix",
@@ -61,6 +61,7 @@
     "fastify-tsconfig": "^2.0.0",
     "pino-pretty": "^11.3.0",
     "prettier": "^3.3.3",
+    "tap": "^21.0.1",
     "tsx": "^4.19.2",
     "typescript": "^5.6.3"
   }
