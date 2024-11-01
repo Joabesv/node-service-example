@@ -36,5 +36,5 @@ export function autoConfig(app: FastifyInstance): FastifyUnderPressureOptions {
  * @see {@link https://www.youtube.com/watch?v=VI29mUA8n9w}
  */
 export default fp(fastifyUnderPressure, {
-  // dependencies: ['drizzle'],
+  dependencies: ['drizzle'],
 })
