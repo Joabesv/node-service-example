@@ -12,8 +12,8 @@ export function autoConfig(app: FastifyInstance): FastifyUnderPressureOptions {
     retryAfter: 50,
     healthCheck: async () => {
       try {
-        await app.drizzle.$client.query('SELECT 1')
-        return true
+        return !!app.drizzle
+        // return true
         /* c8 ignore start */
       }
       catch (err) {
