@@ -18,6 +18,7 @@ const configSchema = z.object({
   RATE_LIMIT_MAX: z.coerce.number().default(4),
   UPLOAD_DIRNAME: z.string().default('uploads'),
   UPLOAD_TASKS_DIRNAME: z.string().default('tasks'),
+  DATABASE_URL: z.string(),
 })
 
 const schema = zodToJsonSchema(configSchema)

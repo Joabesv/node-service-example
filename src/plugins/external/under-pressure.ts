@@ -1,6 +1,7 @@
 import type { FastifyInstance } from 'fastify'
 import fastifyUnderPressure, { type FastifyUnderPressureOptions } from '@fastify/under-pressure'
 import fp from 'fastify-plugin'
+import { usersTable } from '../../models/models.js'
 
 export function autoConfig(app: FastifyInstance): FastifyUnderPressureOptions {
   return {
@@ -12,8 +13,8 @@ export function autoConfig(app: FastifyInstance): FastifyUnderPressureOptions {
     retryAfter: 50,
     healthCheck: async () => {
       try {
-        return !!app.drizzle
-        // return true
+        await app.drizzle.$count(usersTable)
+        return true
         /* c8 ignore start */
       }
       catch (err) {
