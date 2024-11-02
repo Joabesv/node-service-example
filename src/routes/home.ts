@@ -1,5 +1,6 @@
 import type { FastifyPluginAsyncZodOpenApi, FastifyZodOpenApiSchema } from 'fastify-zod-openapi'
 import { z } from 'zod'
+import { userRolesTable } from '../models/models.js'
 import 'zod-openapi/extend'
 
 export const plugin: FastifyPluginAsyncZodOpenApi = async (app) => {
@@ -14,15 +15,14 @@ export const plugin: FastifyPluginAsyncZodOpenApi = async (app) => {
                 description: 'Mensagem padrão',
                 example: 'teste',
               }),
-              t: z.any(),
             }),
           },
         },
       },
     },
   } satisfies FastifyZodOpenApiSchema }, async () => {
-    const aa = await app.drizzle.query.usersTable.findMany()
-    return { message: 'teste', t: aa }
+    const aa = await app.drizzle.$count(userRolesTable)
+    return { message: 'teste', aa }
   })
 }
 
